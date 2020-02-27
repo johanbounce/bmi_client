@@ -1,5 +1,3 @@
-import { scryRenderedComponentsWithType } from "react-dom/test-utils"
-
 describe("Cooper Client calculates successfully", () => {
     it ("calculates cooper performance", () => {
         cy.visit("/");
