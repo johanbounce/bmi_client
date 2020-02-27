@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DisplayCooperResult from './DisplayCooperResult'
 
 class App extends Component {
   render() {
