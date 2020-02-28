@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import DisplayCooperResult from "./components/DisplayCooperResult";
-import InputFields from './components/InputFields';
+import InputFields from "./components/InputFields";
 import LoginForm from "./components/LoginForm";
-import { authenticate } from './modules/auth';
+import { authenticate } from "./modules/auth";
 
 class App extends Component {
   state = {
@@ -10,66 +10,66 @@ class App extends Component {
     gender: "female",
     age: "",
     renderLoginForm: false,
-    autenticated: false,
+    renderLogin: false,
+    authenticated: false,
     message: ""
   };
 
   onChangeHandler = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value});
   };
 
   onLogin = async e => {
     e.preventDefault();
-    const response = await Authenticate(
-      e.target.email.value
+    const response = await authenticate(
+      e.target.email.value,
+      e.target.password.value
     );
-    if (response.autenticated) {
-      this.setState({ autenticated: true });
+    if (response.authenticated) {
+      this.setState({ authenticated: true });
     } else {
       this.setState({ message: response.message, renderLoginForm: false });
     }
   };
 
   render() {
-    const { renderLogin, autenticated, message } = this.state;
+    const { renderLoginForm, authenticated, message } = this.state;
     let renderLogin;
     switch(true) {
-      case renderLoginForm && !autenticated:
-        renderLogin = <LoginForm submitFormHandler={this.onLogin} />
+      case renderLoginForm && !authenticated:
+        renderLogin = <LoginForm submitFormHandler={this.onLogin} />;
         break;
-        case !renderLoginForm && !autenticated:
-          renderLogin = (
+      case !renderLoginForm && !authenticated:
+        renderLogin = (
           <>
-        <button
-          id="login"
-          onClick={() => this.setState({ renderLoginForm: true })}
-      >
-        Login
-      </button>
-          <p>{message}</p>
+            <button
+              id="login"
+              onClick={() => this.setState({ renderLoginForm: true })}
+            >
+              Login
+            </button>
+            <p id='message'>{message}</p>
           </>
-    );
-    break;
-    case authenticated:
-      renderLogin = (
-        <p>Hi {JSON.parse(sessionStorage.getItem("credentials")).uid}</p>
-      );
-      break;
+        );
+        break;
+      case authenticated:
+        renderLogin = (
+          <p>Hi {JSON.parse(sessionStorage.getItem("credentials")).uid}</p>
+        );
+        break;
     }
-
     return (
-      <>      
+      <>
         <InputFields onChangeHandler={this.onChangeHandler} />
         {renderLogin}
         <DisplayCooperResult
           distance={this.state.distance}
           gender={this.state.gender}
           age={this.state.age}
-        />  
+          authenticated={this.state.authenticated}
+        />
       </>
     );
-    
   }
 }
-
 export default App;
