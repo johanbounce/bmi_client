@@ -1,5 +1,4 @@
 import axios from "axios";
-
 const saveData = async (result, entryHandler) => {
   let headers = sessionStorage.getItem("credentials");
   headers = JSON.parse(headers);
@@ -22,5 +21,17 @@ const saveData = async (result, entryHandler) => {
     alert("Something went wrong");
   }
 };
-
-export { saveData };
+const getData = async () => {
+  let headers = sessionStorage.getItem("credentials");
+  headers = JSON.parse(headers);
+  headers = {
+    ...headers,
+    "Content-type": "application/json",
+    Accept: "application/json"
+  };
+  const response = await axios.get("/performance_data", {
+    headers: headers
+  })
+  return response;
+};
+export { getData, saveData }
