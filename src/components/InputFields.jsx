@@ -3,6 +3,7 @@ import React from "react";
 const InputFields = ({ onChangeHandler }) => {
     return (
         <>
+        <div>
         <label>Distance</label>
         <input onChange={onChangeHandler} name="distance" id="distance"></input>
 
@@ -13,6 +14,7 @@ const InputFields = ({ onChangeHandler }) => {
       
         <label>Age</label>
         <input onChange={onChangeHandler} name="age" id="age"></input>
+        </div>
         </>
     );
 };

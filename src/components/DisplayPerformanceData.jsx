@@ -46,16 +46,17 @@ class DisplayPerformanceData extends Component {
             datasets: [{
                 data: distances,   
                 label: "your personal history data",
-                fill: true,
+                fill: false,
                 borderColor: "cyan",
-                backgroundColor: "darkblue"             
+                backgroundColor: "darkblue"           
             }],
-            labels: labels
+            labels: labels,
         }
         return (
             <div id='index'>
                 {dataIndex}
-                <Line data={dataForLineDiagram}/>
+                <Line data={dataForLineDiagram}
+                />
             </div>
         )
     }
