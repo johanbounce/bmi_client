@@ -5,6 +5,7 @@ import LoginForm from "./components/LoginForm";
 import { authenticate } from "./modules/auth";
 import DisplayPerformanceData from './components/DisplayPerformanceData';
 class App extends Component {
+
   state = {
     distance: "",
     gender: "female",
@@ -57,7 +58,7 @@ class App extends Component {
         if (this.state.renderIndex) {
           performanceDataIndex = (
             <>
-              <DisplayPerformanceData 
+              <DisplayPerformanceData
                 updateIndex={this.state.updateIndex}
                 indexUpdated={() => this.setState({ updateIndex: false })}
               />
@@ -73,6 +74,7 @@ class App extends Component {
     }
     return (
       <>
+    
         <InputFields onChangeHandler={this.onChangeHandler} />
         {renderLogin}
         <DisplayCooperResult
